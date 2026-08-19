@@ -1,0 +1,38 @@
+{
+  "name": "fivedollarfootball",
+  "version": "0.1.0",
+  "description": "Official Node.js client for the 5DollarFootballAPI — football fixtures, live scores, standings and odds history",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "football",
+    "soccer",
+    "api",
+    "football-api",
+    "soccer-api",
+    "odds",
+    "fixtures",
+    "live-scores",
+    "sports-data"
+  ],
+  "author": "5DollarFootballAPI",
+  "license": "MIT",
+  "homepage": "https://5dollarfootballapi.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/5dollarfootballapi/football-api-js-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/5dollarfootballapi/football-api-js-sdk/issues"
+  }
+}

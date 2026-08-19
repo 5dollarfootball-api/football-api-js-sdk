@@ -9,7 +9,7 @@ Official Node.js client for the [5DollarFootballAPI](https://5dollarfootballapi.
 - TypeScript definitions included
 - Async iterator that walks `has_more` pages for you
 
-Also available for Python: [`pip install fivedollarfootball`](https://github.com/5dollarfootballapi/football-api-python-sdk).
+Also available for Python: [`pip install fivedollarfootball`](https://github.com/5dollarfootball-api/football-api-python-sdk).
 
 ## Install
 

@@ -30,9 +30,9 @@
   "homepage": "https://5dollarfootballapi.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/5dollarfootballapi/football-api-js-sdk.git"
+    "url": "git+https://github.com/5dollarfootball-api/football-api-js-sdk.git"
   },
   "bugs": {
-    "url": "https://github.com/5dollarfootballapi/football-api-js-sdk/issues"
+    "url": "https://github.com/5dollarfootball-api/football-api-js-sdk/issues"
   }
 }

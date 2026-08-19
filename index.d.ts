@@ -94,7 +94,9 @@ export class Client {
   fixtureStatistics(fixtureId: number): Promise<any>;
   fixtureEvents(fixtureId: number): Promise<any[]>;
   fixtureOdds(fixtureId: number, params?: { bookmakers?: Includes; market?: string }): Promise<any>;
-  oddsHistory(fixtureId: number, market: string, params?: PageParams & { bookmaker?: string }): Promise<Paged>;
+  oddsHistory(fixtureId: number, market: string, params?: PageParams & { bookmaker?: string }): Promise<Paged & {
+    fixtureId?: number; bookmaker?: string; market?: string;
+  }>;
 
   iterAll<T = any>(
     fn: (params: { page: number }) => Promise<Paged<T>>,

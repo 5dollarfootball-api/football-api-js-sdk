@@ -123,6 +123,19 @@ test('429 without retries raises RateLimitError with retryAfter', async () => {
   });
 });
 
+test('oddsHistory unwraps ticks from the data envelope', async () => {
+  const { client, calls } = makeClient([fakeResponse(200, {
+    success: 1,
+    data: { fixture_id: 7, bookmaker: 'bet365', market: 'corner', ticks: [{ minute: null, line: '9.5' }] },
+    pagination: { page: 1, per_page: 100, count: 1, has_more: false },
+  })]);
+  const result = await client.oddsHistory(7, 'corner');
+  assert.equal(result.data[0].line, '9.5');
+  assert.equal(result.bookmaker, 'bet365');
+  assert.equal(result.pagination.has_more, false);
+  assert.ok(calls[0].url.includes('market=corner'));
+});
+
 test('rate limit headers are remembered', async () => {
   const { client } = makeClient([fakeResponse(200, { success: 1, data: [] }, {
     'X-RateLimit-Limit': '10',

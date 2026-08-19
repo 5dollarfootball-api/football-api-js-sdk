@@ -252,11 +252,23 @@ class Client {
     return (await this._get(`/fixtures/${fixtureId}/odds`, { bookmakers, market })).data;
   }
 
-  /** GET /v1/fixtures/{id}/odds/history — every recorded price movement. */
+  /**
+   * GET /v1/fixtures/{id}/odds/history — every recorded price movement.
+   * Returns the ticks as `data` (the endpoint wraps them as `data.ticks`
+   * alongside the fixture/bookmaker/market echo).
+   */
   async oddsHistory(fixtureId, market, { bookmaker, page, perPage } = {}) {
-    return this._paged(await this._get(`/fixtures/${fixtureId}/odds/history`, {
+    const payload = await this._get(`/fixtures/${fixtureId}/odds/history`, {
       market, bookmaker, page, per_page: perPage,
-    }));
+    });
+    const data = payload.data || {};
+    return {
+      data: data.ticks || [],
+      pagination: payload.pagination || null,
+      fixtureId: data.fixture_id,
+      bookmaker: data.bookmaker,
+      market: data.market,
+    };
   }
 
   // ---------------------------------------------------------- pagination

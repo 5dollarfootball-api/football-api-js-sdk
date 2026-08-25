@@ -9,6 +9,7 @@
  */
 
 const DEFAULT_BASE_URL = 'https://api.5dollarfootballapi.com/v1';
+const VERSION = require('./package.json').version;
 
 class FiveDollarFootballError extends Error {}
 
@@ -105,7 +106,7 @@ class Client {
     const headers = {
       Authorization: `Bearer ${this._apiKey}`,
       Accept: 'application/json',
-      'User-Agent': 'fivedollarfootball-js',
+      'User-Agent': `fivedollarfootball-js/${VERSION}`,
     };
 
     let response;

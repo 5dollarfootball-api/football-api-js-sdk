@@ -78,7 +78,10 @@ export class Client {
   bookmakers(): Promise<any[]>;
 
   leagues(params?: PageParams & {
-    popular?: boolean; country?: number; search?: string; esports?: boolean;
+    popular?: boolean;
+    /** Country code as listed by countries(), e.g. 'DE' or 'GB-ENG' (a numeric id is still accepted for legacy accounts). */
+    country?: string | number;
+    search?: string; esports?: boolean;
     /** 'seasons' folds each league's seasons array into the list. */
     include?: 'seasons';
     lang?: string;

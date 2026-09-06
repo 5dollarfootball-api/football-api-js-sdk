@@ -49,7 +49,8 @@ export interface RateLimitState {
   reset: number;
 }
 
-export type FixtureStatus = 'all' | 'scheduled' | 'live' | 'finished';
+/** Filter values; each selects the rows whose `status` field carries that label (`live` selects `in_play`). */
+export type FixtureStatus = 'all' | 'scheduled' | 'live' | 'finished' | 'unknown';
 export type Timestamp = number | Date;
 export type Includes = string | string[];
 
@@ -77,7 +78,10 @@ export class Client {
   bookmakers(): Promise<any[]>;
 
   leagues(params?: PageParams & {
-    popular?: boolean; country?: number; search?: string; esports?: boolean; lang?: string;
+    popular?: boolean; country?: number; search?: string; esports?: boolean;
+    /** 'seasons' folds each league's seasons array into the list. */
+    include?: 'seasons';
+    lang?: string;
   }): Promise<Paged>;
   league(leagueId: number, params?: { lang?: string }): Promise<any>;
   leagueFixtures(leagueId: number, params?: FixtureWindowParams & { season?: number | string }): Promise<Paged>;

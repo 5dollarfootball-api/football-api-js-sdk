@@ -184,9 +184,9 @@ class Client {
   // ------------------------------------------------------------- leagues
 
   /** GET /v1/leagues */
-  async leagues({ popular, country, search, esports, lang, page, perPage } = {}) {
+  async leagues({ popular, country, search, esports, include, lang, page, perPage } = {}) {
     return this._paged(await this._get('/leagues', {
-      popular, country, search, esports, lang, page, per_page: perPage,
+      popular, country, search, esports, include, lang, page, per_page: perPage,
     }));
   }
 

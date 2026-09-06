@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- `leagues({ include: 'seasons' })` folds each league's seasons array into the list (API: `/v1/leagues?include=seasons`).
+- `FixtureStatus` gains `'unknown'`: the API now reports it (with a `status_reason`) for rows the feed lost, and `status: 'unknown'` filters for them.
+
 - The `User-Agent` header now carries the package version.
 
 ## 0.1.1 — 2026-08-22

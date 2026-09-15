@@ -51,6 +51,9 @@ export interface RateLimitState {
 
 /** Filter values; each selects the rows whose `status` field carries that label (`live` selects `in_play`). */
 export type FixtureStatus = 'all' | 'scheduled' | 'live' | 'finished' | 'unknown';
+
+/** Kickoff order on the league and team fixture lists; 'desc' is the API default. */
+export type FixtureOrder = 'asc' | 'desc';
 export type Timestamp = number | Date;
 export type Includes = string | string[];
 
@@ -87,10 +90,10 @@ export class Client {
     lang?: string;
   }): Promise<Paged>;
   league(leagueId: number, params?: { lang?: string }): Promise<any>;
-  leagueFixtures(leagueId: number, params?: FixtureWindowParams & { season?: number | string }): Promise<Paged>;
+  leagueFixtures(leagueId: number, params?: FixtureWindowParams & { season?: number | string; order?: FixtureOrder }): Promise<Paged>;
 
   team(teamId: number, params?: { lang?: string }): Promise<any>;
-  teamFixtures(teamId: number, params?: FixtureWindowParams): Promise<Paged>;
+  teamFixtures(teamId: number, params?: FixtureWindowParams & { order?: FixtureOrder }): Promise<Paged>;
 
   standings(league: number, params?: {
     season?: number | string; type?: 'total' | 'corner' | 'card'; lang?: string;

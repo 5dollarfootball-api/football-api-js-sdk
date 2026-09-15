@@ -195,10 +195,17 @@ class Client {
     return (await this._get(`/leagues/${leagueId}`, { lang })).data;
   }
 
-  /** GET /v1/leagues/{id}/fixtures — a league season's matches. */
-  async leagueFixtures(leagueId, { season, startTime, endTime, status, include, lang, page, perPage } = {}) {
+  /**
+   * GET /v1/leagues/{id}/fixtures — a league's matches, newest kickoff first.
+   *
+   * `order: 'asc'` walks the same set chronologically. Neither order makes
+   * offset paging stable, because the plan's history floor is relative to now
+   * and moves while a crawl runs; pin the window with startTime/endTime to
+   * walk a full history reproducibly.
+   */
+  async leagueFixtures(leagueId, { season, startTime, endTime, status, order, include, lang, page, perPage } = {}) {
     return this._paged(await this._get(`/leagues/${leagueId}/fixtures`, {
-      season, start_time: startTime, end_time: endTime, status, include, lang, page, per_page: perPage,
+      season, start_time: startTime, end_time: endTime, status, order, include, lang, page, per_page: perPage,
     }));
   }
 
@@ -209,10 +216,10 @@ class Client {
     return (await this._get(`/teams/${teamId}`, { lang })).data;
   }
 
-  /** GET /v1/teams/{id}/fixtures — a team's matches, most recent first. */
-  async teamFixtures(teamId, { status, startTime, endTime, include, lang, page, perPage } = {}) {
+  /** GET /v1/teams/{id}/fixtures — a team's matches, most recent first (order: 'asc' to reverse). */
+  async teamFixtures(teamId, { status, startTime, endTime, order, include, lang, page, perPage } = {}) {
     return this._paged(await this._get(`/teams/${teamId}/fixtures`, {
-      status, start_time: startTime, end_time: endTime, include, lang, page, per_page: perPage,
+      status, start_time: startTime, end_time: endTime, order, include, lang, page, per_page: perPage,
     }));
   }
 
